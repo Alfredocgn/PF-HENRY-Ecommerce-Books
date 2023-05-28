@@ -71,12 +71,13 @@ const CardDetail = ({ id }) => {
     <Grid>
       <Grid item xs={12} md={6} lg={4}>
       <Card sx={{display:'flex'}}>
-<Container sx={{flexGrow:1, border: '1px solid black',display:'flex',heigth:'100%',flexDirection:'column',alignItems:'center',justifyContent:'center'}}>
+<Container sx={{flexGrow:1, borderRadius:'2rem',border: '2px solid #a74949',display:'flex',heigth:'100%',flexDirection:'column',alignItems:'center',justifyContent:'center'}}>
             <CardMedia
               component="img"
               image={bookDetail?.image}
               alt={bookDetail?.title}
               sx={{ 
+                padding: '1rem',
                 height: 300, 
                 width: 250,
                 objectFit:"contain"
@@ -118,7 +119,7 @@ const CardDetail = ({ id }) => {
             
           </Container>
           <Container
-          sx={{flexGrow:1, border:'1px solid black',display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center',padding:'2rem'}}
+          sx={{flexGrow:1, border:'2px solid #a74949',borderRadius:'2rem',display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center',padding:'2rem'}}
           >
             {/* <Typography
               variant="body1"

@@ -45,6 +45,7 @@ const NavBar = ({ passTheme, mode }) => {
   const cart = useSelector((state) => state.cart);
   const displayableBooks = useSelector((state) => state.books.displayableBooks);
 
+
   const showTheme = mode.palette.mode
 
   const handleMenu = (event) => {
@@ -223,7 +224,7 @@ const NavBar = ({ passTheme, mode }) => {
                         aria-label="buttons"
                         sx={{ mr: 2 }}
                         color="inherit"
-                        onClick={() => dispatch(toogleCart())}
+                        onClick={ () => dispatch(toogleCart())}
                       >
                         <Badge
                           badgeContent={availableItems(displayableBooks, cart).length}

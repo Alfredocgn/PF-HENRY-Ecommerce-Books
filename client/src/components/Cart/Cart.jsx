@@ -41,6 +41,7 @@ const Cart = () => {
   const cart = useSelector((state) => state.cart);
   const abrir = useSelector((state) => state.toogle.isOpen);
   const displayableBooks = useSelector((state) => state.books.displayableBooks);
+  console.log(cart.cart.cart.length)
 
   const [order, setOrder] = useState({});
   const [snackbarOpen, setSnackbarOpen] = useState(false);
@@ -99,6 +100,7 @@ const Cart = () => {
   };
 
   return (
+    
     <Drawer anchor={"right"} open={abrir} onClose={() => handleClose()}>
       <Box sx={{ width: "25em", p: 2 }}>
         <Stack
@@ -253,6 +255,8 @@ const Cart = () => {
         ) : null}
       </Box>
     </Drawer>
+
+
   );
 };
 
