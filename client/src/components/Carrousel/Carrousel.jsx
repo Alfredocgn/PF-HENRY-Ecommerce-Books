@@ -155,7 +155,7 @@ const Carrousel = () => {
                     image={book.image}
                     alt={book.title}
                     sx={{ cursor: "pointer", width: '5rem', height: '5rem' }}
-                    onClick={() => dispatch(openModal(book.id))}
+                    onClick={() => handleNavigate(book.id)}
                   />
                 </Grid>
               </Grid>
@@ -448,7 +448,7 @@ const Carrousel = () => {
                               image={book.image}
                               alt={book.title}
                               sx={{ cursor: "pointer", marginTop: '20px' }}
-                              onClick={() => dispatch(openModal(book.id))}
+                              onClick={() => handleNavigate(book.id)}
                             />
                             {book.discount ? (
                               <Typography
@@ -599,7 +599,7 @@ const Carrousel = () => {
                               image={book.image}
                               alt={book.title}
                               sx={{ cursor: "pointer", marginTop: '20px' }}
-                              onClick={() => dispatch(openModal(book.id))}
+                              onClick={() => handleNavigate(book.id)}
                             />
                             {book.discount ? (
                               <Typography

@@ -11,12 +11,15 @@ import {
   Typography,
   CardMedia,
   Grid,
+  Snackbar,
+  Alert,
 } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import BookmarkOutlinedIcon from "@mui/icons-material/BookmarkOutlined";
 import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
 import { addProduct } from "../../redux/rootReducer/cartSlice";
 import { openModal } from "../../redux/rootReducer/bookSlice";
+import { useNavigate } from "react-router-dom";
 
 const Card = ({
   image,
@@ -30,13 +33,25 @@ const Card = ({
 }) => {
   const favorite = useSelector((state) => state.favorite.favorites);
   const dispatch = useDispatch();
+  //Snackbar
+  const [snackbarOpen,setSnackbarOpen] = useState(false)
+  const [snackbarMessage,setSnackbarMessage] = useState("")
 
   //FAVORITES
   const [isFav, setIsFav] = useState(false);
+  const navigate = useNavigate()
+
+
+  const handleNavigate = (bookId) =>{
+    navigate(`/booksDetail/${bookId}`)
+  }
 
   useEffect(() => {
     if (favorite.favorites.includes(id)) {
-      if (!isFav) setIsFav(true);
+      if (!isFav) {
+        setIsFav(true)
+        setSnackbarMessage('The book is already on favorites')
+      };
     } else if (isFav) setIsFav(false);
     // eslint-disable-next-line
   }, [favorite, id]);
@@ -45,15 +60,20 @@ const Card = ({
     if (isFav) {
       dispatch(deleteFavorite(id));
       setIsFav(false);
+      setSnackbarMessage("Book deleted from favorites")
     } else {
       dispatch(addFavorite(id));
 
       setIsFav(true);
+      setSnackbarMessage('The book was added to favorites')
     }
+    setSnackbarOpen(true)
   };
 
   const handleAdd = (id) => {
     dispatch(addProduct({id}));
+    setSnackbarMessage("Book added to the cart")
+    setSnackbarOpen(true)
   };
   
 
@@ -107,6 +127,21 @@ const Card = ({
             <BookmarkBorderOutlinedIcon />
           </Button>
         )}
+        <Snackbar 
+        open={snackbarOpen}
+        autoHideDuration={3000}
+        onClose={()=>setSnackbarOpen(false)}
+        >
+          <Alert
+          onClose={() => setSnackbarOpen(false)}
+          severity="success"
+          elevation={6}
+          variant="filled"
+          >
+            {snackbarMessage}
+          </Alert>
+
+        </Snackbar>
       </Grid>
       <Grid
         item
@@ -125,6 +160,20 @@ const Card = ({
         <Button variant="contained" size="small" onClick={() => handleAdd(id)}>
           <ShoppingCartIcon />
         </Button>
+        <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={3000}
+        onClose={()=> setSnackbarOpen(false)}
+        >
+          <Alert
+          onClose={() => setSnackbarOpen(false)}
+          severity="success"
+          elevation={6}
+          variant="filled"
+          >
+            {snackbarMessage}
+          </Alert>
+        </Snackbar>
       </Grid>
       <Grid
         item
@@ -169,7 +218,7 @@ const Card = ({
           </Typography>
         </CardContent>
         <CardActions>
-          <Button variant="contained" onClick={()=>dispatch(openModal(id))}>
+          <Button variant="contained" onClick={()=>handleNavigate(id)}>
             Details
           </Button>
         </CardActions>
